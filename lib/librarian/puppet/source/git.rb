@@ -65,6 +65,7 @@ module Librarian
 
         def cache_in_vendor(tmp_path)
           Librarian::Posix.run!(%W{git archive -o #{vendor_tar} #{sha}}, :chdir => tmp_path.to_s)
+          File.unlink vendor_tgz if File.file?(vendor_tgz)
           Librarian::Posix.run!(%W{gzip #{vendor_tar}}, :chdir => tmp_path.to_s)
         end
 
